@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const monthNames = [
+const MONTH_NAMES = [
   "January",
   "February",
   "March",
@@ -15,6 +15,10 @@ const monthNames = [
   "November",
   "December"
 ];
+
+const DAY_OF_WEEK = [0, 1, 2, 3, 4, 5, 6];
+const NO_ROWS_WEEK = [0, 1, 2, 3, 4];
+const DAY_OF_WEEK_SHORT = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 
 const Calendar = () => {
   const [startDate, setStartDate] = useState<Date | null>();
@@ -39,7 +43,7 @@ const Calendar = () => {
   const getHeader = () => {
     return (
       <>
-        {["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"].map((dayOfWeek) => {
+        {DAY_OF_WEEK_SHORT.map((dayOfWeek) => {
           return (
             <span
               key={dayOfWeek}
@@ -151,7 +155,6 @@ const Calendar = () => {
           cursor: isDisabled ? "unset" : "pointer",
           backgroundColor: isSelected(cDateObj) ? "lightblue" : backgroundColor
         }}
-        // key={weekNumber*dayOfWeek+currentDate}
         onClick={() => {
           if (isDisabled) {
             // reset start and end date
@@ -186,7 +189,7 @@ const Calendar = () => {
     return (
       <div key={weekNumber}
       style={{ width: "100%", height: "55px" }}>
-        {[0, 1, 2, 3, 4, 5, 6].map((dayOfWeek) => {
+        {DAY_OF_WEEK.map((dayOfWeek) => {
           return getDay(dayOfWeek, weekNumber);
         })}
       </div>
@@ -214,7 +217,7 @@ const Calendar = () => {
           Prev
         </button>
         <h3>
-          {monthNames[currentDateObj.getMonth()]} {currentDateObj.getFullYear()}
+          {MONTH_NAMES[currentDateObj.getMonth()]} {currentDateObj.getFullYear()}
         </h3>
         <button
           onClick={() => {
@@ -255,7 +258,7 @@ const Calendar = () => {
 
       {getHeader()}
 
-      {[0, 1, 2, 3, 4].map((weekNumber) => {
+      {NO_ROWS_WEEK.map((weekNumber) => {
         return getWeek(weekNumber);
       })}
     </>
