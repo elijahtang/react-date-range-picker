@@ -40,8 +40,7 @@ const Calendar = () => {
   }, [currentDateObj]);
 
   // a function to render day of week header
-  const getHeader = () => {
-    return (
+  const getHeader = () =>  (
       <>
         {DAY_OF_WEEK_SHORT.map((dayOfWeek) => {
           return (
@@ -59,7 +58,6 @@ const Calendar = () => {
         })}
       </>
     );
-  };
 
   const isSelected = (d: Date) => {
     if (!startDate) {
